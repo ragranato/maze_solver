@@ -22,6 +22,9 @@ class Window:
     def close(self):
         self.win_running = False
         self.root.protocol("WM_DELETE_WINDOW", self.close)
+    
+    def draw_line(self, line, fill_color):
+        line.draw(self.canvas, fill_color)
 
 class Point:
     def __init__(self):
@@ -29,11 +32,18 @@ class Point:
         self.y = 0
 
 class Line:
-    def __init__(self, ):
-        pass
+    def __init__(self, point1=Point(), point2=Point()):
+        self.point1 = point1
+        self.point2 = point2
+    
+    def draw(self, canvas, fill_color):
+        canvas.create_line(
+            self.point1.x, self.point1.y, self.point2.x, self.point2.y, fill=fill_color, width=2
+        )
+        
 
 def main():
-    win = Window(800, 600)
+    win = Window(800, 600)    
     win.wait_for_close()
 
 if __name__ == "__main__":
